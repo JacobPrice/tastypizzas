@@ -22,6 +22,7 @@ class ComposerStaticInitd22f06c48998ddb20cea0be3a175f574
         ),
         'C' => 
         array (
+            'Composer\\Installers\\' => 20,
             'CharlesRumley\\Tests\\' => 20,
             'CharlesRumley\\' => 14,
         ),
@@ -55,6 +56,10 @@ class ComposerStaticInitd22f06c48998ddb20cea0be3a175f574
         'PragmaRX\\Random\\' => 
         array (
             0 => __DIR__ . '/..' . '/pragmarx/random/src',
+        ),
+        'Composer\\Installers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
         ),
         'CharlesRumley\\Tests\\' => 
         array (

@@ -9,7 +9,6 @@ use SG_Security\Install_Service\Install_1_2_0;
 use SG_Security\Install_Service\Install_1_2_1;
 use SG_Security\Install_Service\Install_1_2_2;
 use SG_Security\Install_Service\Install_1_2_3;
-use SG_Security\Install_Service\Install_1_2_5;
 use SG_Security\Install_Service\Install_1_3_2;
 
 /**
@@ -34,7 +33,6 @@ class Install_Service {
 			new Install_1_2_1(),
 			new Install_1_2_2(),
 			new Install_1_2_3(),
-			new Install_1_2_5(),
 			new Install_1_3_2(),
 		);
 	}

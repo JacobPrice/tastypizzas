@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'eca681d69253003d423ddfccef2a3eb663b3a006',
+        'reference' => 'e5e4784cbe8bd388b3f101c04036b8c12a55b548',
         'name' => 'siteground/sg-cachepress',
         'dev' => true,
     ),
@@ -30,13 +30,22 @@
             'reference' => 'c2d228fbbb69b90b6c331141b89c4faf985e6152',
             'dev_requirement' => false,
         ),
+        'composer/installers' => array(
+            'pretty_version' => 'v1.12.0',
+            'version' => '1.12.0.0',
+            'type' => 'composer-plugin',
+            'install_path' => __DIR__ . '/./installers',
+            'aliases' => array(),
+            'reference' => 'd20a64ed3c94748397ff5973488761b22f6d3f19',
+            'dev_requirement' => false,
+        ),
         'matthiasmullie/minify' => array(
-            'pretty_version' => '1.3.68',
-            'version' => '1.3.68.0',
+            'pretty_version' => '1.3.69',
+            'version' => '1.3.69.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../matthiasmullie/minify',
             'aliases' => array(),
-            'reference' => 'c00fb02f71b2ef0a5f53fe18c5a8b9aa30f48297',
+            'reference' => 'a61c949cccd086808063611ef9698eabe42ef22f',
             'dev_requirement' => false,
         ),
         'matthiasmullie/path-converter' => array(
@@ -57,6 +66,12 @@
             'reference' => 'd5dbae0b0c0567923d25b3ae5e2bf1e9cbcedf76',
             'dev_requirement' => false,
         ),
+        'roundcube/plugin-installer' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '*',
+            ),
+        ),
         'sepia/po-parser' => array(
             'pretty_version' => '4.2.2',
             'version' => '4.2.2.0',
@@ -66,13 +81,19 @@
             'reference' => '8a6bbcd4a231b19e1b052c1c46b0fe2935331afe',
             'dev_requirement' => false,
         ),
+        'shama/baton' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '*',
+            ),
+        ),
         'siteground/sg-cachepress' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'eca681d69253003d423ddfccef2a3eb663b3a006',
+            'reference' => 'e5e4784cbe8bd388b3f101c04036b8c12a55b548',
             'dev_requirement' => false,
         ),
         'siteground/siteground-data' => array(
@@ -83,7 +104,7 @@
             'aliases' => array(
                 0 => '9999999-dev',
             ),
-            'reference' => '58ba53b8a5711c0cd33be62ebedf99cc2ec180ec',
+            'reference' => 'c264465ed26f2a8509b2a2b59ccc64c73971b343',
             'dev_requirement' => false,
         ),
         'siteground/siteground-emails' => array(

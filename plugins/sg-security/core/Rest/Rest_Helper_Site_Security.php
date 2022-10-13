@@ -6,7 +6,6 @@ use SG_Security\Readme_Service\Readme_Service;
 use SG_Security\Htaccess_Service\Directory_Service;
 use SG_Security\Htaccess_Service\Headers_Service;
 use SG_Security\Htaccess_Service\Xmlrpc_Service;
-use SG_Security\Htaccess_Service\Hsts_Service;
 use SG_Security\Message_Service\Message_Service;
 use SG_Security\Options_Service\Options_Service;
 
@@ -22,7 +21,6 @@ class Rest_Helper_Site_Security extends Rest_Helper {
 		$this->readme_service      = new Readme_Service();
 		$this->rest_helper_options = new Rest_Helper_Options();
 		$this->directory_service   = new Directory_Service();
-		$this->hsts_service        = new Hsts_Service();
 		$this->xmlrpc_service      = new Xmlrpc_Service();
 	}
 
@@ -103,21 +101,6 @@ class Rest_Helper_Site_Security extends Rest_Helper {
 	 */
 	public function xss_protection( $request ) {
 		$this->rest_helper_options->change_option_from_rest( $request, 'xss_protection' );
-	}
-
-	/**
-	 * Enable HSTS protection.
-	 *
-	 * @since  1.1.0
-	 *
-	 * @param  object $request Request data.
-	 */
-	public function hsts_protection( $request ) {
-		$value = $this->validate_and_get_option_value( $request, 'hsts_protection' );
-
-		$this->hsts_service->toggle_rules( $value );
-
-		$this->rest_helper_options->change_option_from_rest( $request, 'hsts_protection' );
 	}
 
 	/**

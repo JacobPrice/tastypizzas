@@ -47,6 +47,7 @@ class Message_Service {
 			'environment_permissions'                      => __( 'Can Optimize Environment', 'sg-cachepress' ),
 			'heartbeat_control'                            => __( 'Heartbeat Optimization', 'sg-cachepress' ),
 			'database_optimization'                        => __( 'Scheduled Database Maintenance', 'sg-cachepress' ),
+			'database_optimization_updated'                => __( 'Scheduled Database Maintenance Updated', 'sg-cachepress' ),
 			'dns_prefetch'                                 => __( 'DNS Prefetching', 'sg-cachepress' ),
 			'preload_combined_css'                         => __( 'Preload Combined CSS', 'sg-cachepress' ),
 			'cloudflare_optimization'                      => __( 'Cloudflare Optimization', 'sg-cachepress' ),

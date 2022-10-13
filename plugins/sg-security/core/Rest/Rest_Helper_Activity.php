@@ -3,7 +3,9 @@ namespace SG_Security\Rest;
 
 use SG_Security\Block_Service\Block_Service;
 use SG_Security\Helper\Helper;
+use SG_Security\Activity_Log\Activity_Log;
 use SG_Security\Activity_Log\Activity_Log_Weekly_Emails;
+use SG_Security\Rest\Rest_Helper_Options;
 
 /**
  * Rest Helper class that manages all of the options.
@@ -21,8 +23,10 @@ class Rest_Helper_Activity extends Rest_Helper {
 	 * The constructor.
 	 */
 	public function __construct() {
-		$this->block_service = new Block_Service();
-		$this->weekly_emails = new Activity_Log_Weekly_Emails();
+		$this->block_service       = new Block_Service();
+		$this->weekly_emails       = new Activity_Log_Weekly_Emails();
+		$this->activity_log        = new Activity_Log();
+		$this->rest_helper_options = new Rest_Helper_Options();
 	}
 
 	/**
@@ -433,7 +437,7 @@ class Rest_Helper_Activity extends Rest_Helper {
 			);
 		}
 
-		if ( 'system' === $log_entry['object_id']  ) {
+		if ( 'system' === $log_entry['object_id'] ) {
 			return array(
 				'nicename'     => __( 'Server Systems', 'sg-security' ),
 				'blocked'      => 0,
@@ -521,6 +525,13 @@ class Rest_Helper_Activity extends Rest_Helper {
 		return $select . $where . $order . $limit . $offset . ';';
 	}
 
+	/**
+	 * Gets the request filters.
+	 *
+	 * @param      object $request  The request
+	 *
+	 * @return     array   The request filters.
+	 */
 	public function get_request_filters( $request ) {
 		$body    = json_decode( $request->get_body(), 1 );
 		$filters = array();
@@ -712,7 +723,7 @@ class Rest_Helper_Activity extends Rest_Helper {
 
 		foreach ( $limit_login_attempts as $ip => $attempt ) {
 			// Check if IP is blocked.
-			if ( empty ( $attempt['timestamp'] ) ) {
+			if ( empty( $attempt['timestamp'] ) ) {
 				continue;
 			}
 
@@ -779,6 +790,41 @@ class Rest_Helper_Activity extends Rest_Helper {
 					$this->weekly_emails->weekly_report_receipients(),
 				),
 			)
+		);
+	}
+
+	/**
+	 * Enable or disable the activity log.
+	 *
+	 * @since 1.3.3
+	 *
+	 * @param object $request Request data.
+	 */
+	public function manage_activity_log( $request ) {
+		$this->rest_helper_options->change_option_from_rest( $request, 'disable_activity_log' );
+	}
+
+	/**
+	 * Manage the activity log lifetime.
+	 *
+	 * @since 1.3.3
+	 *
+	 * @param object $request Request data.
+	 */
+	public function activity_log_lifetime( $request ) {
+		// Validate the request.
+		$log_lifetime = intval( $this->validate_and_get_option_value( $request, 'log_lifetime' ) );
+
+		// Update the activity log lifetime.
+		update_option( 'sgs_activity_log_lifetime', $log_lifetime );
+
+		// Delete the old log records from the database.
+		$this->activity_log->delete_old_activity_logs();
+
+		self::send_json(
+			'Activity log lifetime updated!',
+			1,
+			$this->prepare_options_selected_values( array_combine( range( 1, 12 ), range( 1, 12 ) ), intval( get_option( 'sgs_activity_log_lifetime', 12 ) ) )
 		);
 	}
 }

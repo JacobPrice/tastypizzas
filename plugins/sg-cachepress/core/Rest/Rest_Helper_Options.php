@@ -38,7 +38,6 @@ class Rest_Helper_Options extends Rest_Helper {
 		'environment' => array(
 			'ssl_enabled',
 			'fix_insecure_content',
-			'database_optimization',
 			'enable_gzip_compression',
 			'enable_browser_caching',
 		),
@@ -321,8 +320,12 @@ class Rest_Helper_Options extends Rest_Helper {
 				break;
 			case 'environment':
 				$page_data = array(
-					'heartbeat_dropdowns' => $this->heartbeat_control->prepare_intervals(),
-					'heartbeat_control'   => $this->heartbeat_control->is_enabled(),
+					'heartbeat_dropdowns'        => $this->heartbeat_control->prepare_intervals(),
+					'heartbeat_control'          => $this->heartbeat_control->is_enabled(),
+					'database_optimization'      => array(
+						'default'  => $this->options->get_database_optimization_defaults(),
+						'selected' => array_values( get_option( $this->option_prefix . 'database_optimization', array() ) ),
+					)
 				);
 				break;
 			case 'frontend':

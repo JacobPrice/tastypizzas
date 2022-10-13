@@ -89,4 +89,31 @@ abstract class Rest_Helper {
 	public function get_response_message( $result, $option ) {
 		return Message_Service::get_response_message( $result, $option );
 	}
+
+	/**
+	 * Prepare dropdown options and selected values to be sent to react.
+	 *
+	 * @since 1.3.3
+	 *
+	 * @param      array $options  The options/label array.
+	 * @param      bool  $value    The current value.
+	 *
+	 * @return     array  Data sent to the react.
+	 */
+	public function prepare_options_selected_values( $options, $value ) {
+		// Prepare the data array.
+		$data = array();
+
+		// Generate the data array for the react app.
+		foreach ( $options as $key => $label ) {
+			$data[] = array(
+				'value'    => $key,
+				'selected' => $key === $value ? 1 : 0,
+				'label'    => $label,
+			);
+		}
+
+		// Return the data.
+		return $data;
+	}
 }

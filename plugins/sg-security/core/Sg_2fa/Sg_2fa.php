@@ -4,6 +4,8 @@ namespace SG_Security\Sg_2fa;
 use PHPGangsta_GoogleAuthenticator;
 use SG_Security;
 
+use SG_Security\Helper\User_Roles_Trait;
+
 use PragmaRX\Recovery\Recovery;
 use \WP_Session_Tokens;
 
@@ -11,6 +13,8 @@ use \WP_Session_Tokens;
  * Class that manages 2FA related services.
  */
 class Sg_2fa {
+
+	use User_Roles_Trait;
 	/**
 	 * The singleton instance.
 	 *
@@ -19,16 +23,6 @@ class Sg_2fa {
 	 * @var \Sg_2fa The singleton instance.
 	 */
 	public static $instance;
-
-	/**
-	 * Roles that should be forced to use 2FA.
-	 *
-	 * @var array
-	 */
-	public $roles = array(
-		'editor',
-		'administrator',
-	);
 
 	/**
 	 * The constructor.
@@ -52,17 +46,6 @@ class Sg_2fa {
 			self::$instance = new self();
 		}
 		return self::$instance;
-	}
-
-	/**
-	 * Get the roles that apply for 2FA.
-	 *
-	 * @since 1.2.0
-	 *
-	 * @return array The roles, that have 2FA enabled.
-	 */
-	public function get_2fa_user_roles() {
-		return apply_filters( 'sg_security_2fa_roles', $this->roles );
 	}
 
 	/**
@@ -113,7 +96,7 @@ class Sg_2fa {
 	public function enable_2fa() {
 		$users = get_users(
 			array(
-				'role__in' => $this->get_2fa_user_roles(),
+				'role__in' => $this->get_admin_user_roles(),
 			)
 		);
 
@@ -125,7 +108,7 @@ class Sg_2fa {
 			// Get the user by the user id.
 			$user = get_userdata( $user->data->ID );
 
-			if ( empty( array_intersect( $this->get_2fa_user_roles(), $user->roles ) ) ) {
+			if ( empty( array_intersect( $this->get_admin_user_roles(), $user->roles ) ) ) {
 				continue;
 			}
 
@@ -329,6 +312,11 @@ class Sg_2fa {
 		// Include the template.php if the function doesn't exists.
 		if ( ! function_exists( 'submit_button' ) ) {
 			require_once ABSPATH . '/wp-admin/includes/template.php';
+		}
+
+		// Jetpack SSO Hiding 2FA form.
+		if ( class_exists( 'Jetpack_SSO' ) ) {
+			remove_filter( 'login_body_class', array( \Jetpack_SSO::get_instance(), 'login_body_class' ) );
 		}
 
 		login_header();
@@ -540,7 +528,7 @@ class Sg_2fa {
 	 */
 	public function init_2fa( $user_login, $user ) {
 		// Bail if the user role does not allow 2FA setup.
-		if ( empty( array_intersect( $this->get_2fa_user_roles(), $user->roles ) ) ) {
+		if ( empty( array_intersect( $this->get_admin_user_roles(), $user->roles ) ) ) {
 			return;
 		}
 
@@ -775,7 +763,7 @@ class Sg_2fa {
 		// Get all users with 2FA configured.
 		$users = get_users(
 			array(
-				'role__in'   => $this->get_2fa_user_roles(),
+				'role__in'   => $this->get_admin_user_roles(),
 				'orderby'    => 'user_login',
 				'order'      => 'ASC',
 				'fields'     => array(

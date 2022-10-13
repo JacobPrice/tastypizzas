@@ -16,10 +16,11 @@ __( "SiteGround Security - Activity Log" ), // src/constants/page-info.js:39
 __( "The activity log can help you monitor your site and login page for unauthorised visitors or brute force attempts. You can easily block and unblock IPs or visitors that look suspicious and prevent them from malicious actions." ), // src/constants/page-info.js:40
 __( "SiteGround Security - Post-hack Actions" ), // src/constants/page-info.js:47
 __( "If you believe that your website was hacked, you have installed a compromised plugin or one of your users login has been compromised, you can use the tools in our post-hack actions for a quick remedy." ), // src/constants/page-info.js:48
-__( "Unknown Visitors Activity" ), // src/pages/activity-log/activity-log.jsx:25
-__( "Registered Users Activity" ), // src/pages/activity-log/activity-log.jsx:27
-__( "Blocked" ), // src/pages/activity-log/activity-log.jsx:29
-__( "Weekly Reports" ), // src/pages/activity-log/activity-log.jsx:31
+__( "Unknown Visitors Activity" ), // src/pages/activity-log/activity-log.jsx:26
+__( "Registered Users Activity" ), // src/pages/activity-log/activity-log.jsx:28
+__( "Blocked" ), // src/pages/activity-log/activity-log.jsx:30
+__( "Weekly Reports" ), // src/pages/activity-log/activity-log.jsx:32
+__( "Log Settings" ), // src/pages/activity-log/activity-log.jsx:34
 __( "Filter Activity" ), // src/pages/activity-log/activity-table.jsx:79
 __( "close" ), // src/pages/activity-log/activity-table.jsx:91
 __( "reset" ), // src/pages/activity-log/activity-table.jsx:92
@@ -27,7 +28,7 @@ __( "Blocked On" ), // src/pages/activity-log/blocked-users.jsx:39
 __( "User/Ip" ), // src/pages/activity-log/blocked-users.jsx:44
 __( "Actions" ), // src/pages/activity-log/blocked-users.jsx:48
 __( "unblock" ), // src/pages/activity-log/blocked-users.jsx:73
-__( "Email" ), // src/pages/activity-log/constants.jsx:30
+__( "Email" ), // src/pages/activity-log/constants.jsx:35
 __( "Delete Notification Email" ), // src/pages/activity-log/dialogs/delete-email-record.jsx:28
 __( "This action cannot be undone. Are you sure you wish to proceed?" ), // src/pages/activity-log/dialogs/delete-email-record.jsx:59
 __( "Edit Notification Email" ), // src/pages/activity-log/dialogs/edit-email-record.jsx:30
@@ -42,6 +43,10 @@ __( "Block {{em}}{{strong}}%(user)s{{/strong}}{{/em}}" ), // src/pages/activity-
 __( "{{strong}}%(user)s{{/strong}} is currently blocked." ), // src/pages/activity-log/dialogs/manage-user-traffic.jsx:48
 __( "Blocking {{strong}}%(user)s{{/strong}} will prevent them from accessing your site until you manually unblock them from the Blocked tab." ), // src/pages/activity-log/dialogs/manage-user-traffic.jsx:52
 __( "Are you sure you wish to proceed?" ), // src/pages/activity-log/dialogs/manage-user-traffic.jsx:85
+__( "Enable Activity Log" ), // src/pages/activity-log/log-settings.jsx:33
+__( "The Activity Log feature is enabled by default and records all website activity events over the last 12 days, including human visits, bot crawls, login attempts, and more. If you expect high traffic, please disable the activity log to stop recording your website's activity events." ), // src/pages/activity-log/log-settings.jsx:34
+__( "Number of days logged" ), // src/pages/activity-log/log-settings.jsx:56
+__( "From here, you can select the number of days you want to log your website's activity events for. You can choose between 1 and 12 days. Please note, that if you select less than 8 days, you will not receive your site's weekly reports." ), // src/pages/activity-log/log-settings.jsx:57
 __( "Timestamp" ), // src/pages/activity-log/registered-users.jsx:24
 __( "User" ), // src/pages/activity-log/registered-users.jsx:29
 __( "IP Address" ), // src/pages/activity-log/registered-users.jsx:33
@@ -138,30 +143,27 @@ __( "force password reset" ), // src/pages/post-hack-actions/post-hack-actions.j
 __( "Log out All Users" ), // src/pages/post-hack-actions/post-hack-actions.jsx:71
 __( "This will log out all currently logged in users without asking them to change their passwords." ), // src/pages/post-hack-actions/post-hack-actions.jsx:72
 __( "Log out All Users" ), // src/pages/post-hack-actions/post-hack-actions.jsx:88
-__( "Site Security" ), // src/pages/site-security/site-security.jsx:45
-__( "recommended" ), // src/pages/site-security/site-security.jsx:49
-__( "Lock and Protect System Folders" ), // src/pages/site-security/site-security.jsx:50
-__( "By enabling this option you are ensuring that no unauthorised or malicious scripts can be executed in your system folders. This is an often exploited back door you can close with a simple toggle." ), // src/pages/site-security/site-security.jsx:51
-__( "recommended" ), // src/pages/site-security/site-security.jsx:74
-__( "Hide WordPress Version" ), // src/pages/site-security/site-security.jsx:75
-__( "Many attackers scan sites for vulnerable WordPress versions. By hiding the version from your site HTML, you avoid being marked by hackers for mass attacks." ), // src/pages/site-security/site-security.jsx:76
-__( "recommended" ), // src/pages/site-security/site-security.jsx:99
-__( "Disable Themes & Plugins Editor" ), // src/pages/site-security/site-security.jsx:100
-__( "Disable the option to edit themes and plugins code directly from the WordPress admin to prevent potential coding errors or unauthorised access via the WordPress editor." ), // src/pages/site-security/site-security.jsx:101
-__( "recommended" ), // src/pages/site-security/site-security.jsx:124
-__( "Disable XML-RPC" ), // src/pages/site-security/site-security.jsx:125
-__( "XML-RPC was designed as a protocol enabling WordPress to communicate with third-party systems but recently it has been used in a number of exploits. Unless you specifically need to use it, we recommend that XML-RPC is always disabled." ), // src/pages/site-security/site-security.jsx:126
-__( "recommended" ), // src/pages/site-security/site-security.jsx:150
-__( "Force HTTP Strict-Transport-Security (HSTS)" ), // src/pages/site-security/site-security.jsx:151
-__( "Enabling this option protects your site from cookie hijacking and protocol downgrade attacks. It is an additional rule forcing browsers to request HTTPS for your domain." ), // src/pages/site-security/site-security.jsx:152
-__( "recommended" ), // src/pages/site-security/site-security.jsx:176
-__( "Disable RSS and ATOM Feeds" ), // src/pages/site-security/site-security.jsx:177
-__( "RSS and ATOM feeds are often used to scrape your content and to perform a number of attacks against your site. Only use feeds if you have readers using your site via RSS readers." ), // src/pages/site-security/site-security.jsx:178
-__( "recommended" ), // src/pages/site-security/site-security.jsx:201
-__( "Advanced XSS Protection" ), // src/pages/site-security/site-security.jsx:202
-__( "Enabling this option will add extra headers to your site for protection against XSS attacks." ), // src/pages/site-security/site-security.jsx:203
-__( "Delete the Default Readme.html" ), // src/pages/site-security/site-security.jsx:226
-__( "WordPress comes with a readme.html file containing information about your website. The readme.html is often used by hackers to compile lists of potentially vulnerable sites which can be hacked or attacked." ), // src/pages/site-security/site-security.jsx:227
+__( "Site Security" ), // src/pages/site-security/site-security.jsx:41
+__( "recommended" ), // src/pages/site-security/site-security.jsx:45
+__( "Lock and Protect System Folders" ), // src/pages/site-security/site-security.jsx:46
+__( "By enabling this option you are ensuring that no unauthorised or malicious scripts can be executed in your system folders. This is an often exploited back door you can close with a simple toggle." ), // src/pages/site-security/site-security.jsx:47
+__( "recommended" ), // src/pages/site-security/site-security.jsx:70
+__( "Hide WordPress Version" ), // src/pages/site-security/site-security.jsx:71
+__( "Many attackers scan sites for vulnerable WordPress versions. By hiding the version from your site HTML, you avoid being marked by hackers for mass attacks." ), // src/pages/site-security/site-security.jsx:72
+__( "recommended" ), // src/pages/site-security/site-security.jsx:95
+__( "Disable Themes & Plugins Editor" ), // src/pages/site-security/site-security.jsx:96
+__( "Disable the option to edit themes and plugins code directly from the WordPress admin to prevent potential coding errors or unauthorised access via the WordPress editor." ), // src/pages/site-security/site-security.jsx:97
+__( "recommended" ), // src/pages/site-security/site-security.jsx:120
+__( "Disable XML-RPC" ), // src/pages/site-security/site-security.jsx:121
+__( "XML-RPC was designed as a protocol enabling WordPress to communicate with third-party systems but recently it has been used in a number of exploits. Unless you specifically need to use it, we recommend that XML-RPC is always disabled." ), // src/pages/site-security/site-security.jsx:122
+__( "recommended" ), // src/pages/site-security/site-security.jsx:144
+__( "Disable RSS and ATOM Feeds" ), // src/pages/site-security/site-security.jsx:145
+__( "RSS and ATOM feeds are often used to scrape your content and to perform a number of attacks against your site. Only use feeds if you have readers using your site via RSS readers." ), // src/pages/site-security/site-security.jsx:146
+__( "recommended" ), // src/pages/site-security/site-security.jsx:169
+__( "Advanced XSS Protection" ), // src/pages/site-security/site-security.jsx:170
+__( "Enabling this option will add extra headers to your site for protection against XSS attacks." ), // src/pages/site-security/site-security.jsx:171
+__( "Delete the Default Readme.html" ), // src/pages/site-security/site-security.jsx:194
+__( "WordPress comes with a readme.html file containing information about your website. The readme.html is often used by hackers to compile lists of potentially vulnerable sites which can be hacked or attacked." ), // src/pages/site-security/site-security.jsx:195
 __( "Either a security plugin, custom function, or rules in your .htaccess file is preventing the WordPress REST API from working properly. SiteGround Optimizer is using it to store its options and other functionalities so please make sure it works properly." ), // src/sagas/requests-completion.js:26
 __( "Could not connect to the WordPress REST API" ), // src/sagas/requests-completion.js:29
 __( "Either a security plugin, custom function or rules in your .htaccess file is preventing the WordPress REST API from working properly. SiteGround Security is using it to store its options and other functionalities so please make sure it works properly." ), // src/sagas/requests-completion.js:38

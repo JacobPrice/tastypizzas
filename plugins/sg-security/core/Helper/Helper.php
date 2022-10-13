@@ -88,6 +88,7 @@ class Helper {
 	public function custom_wp_die_callback( $message, $title, $args ) {
 		// Call the default wp_die_handler if the custom param is not set or a WP_Error object is present.
 		if ( is_object( $message ) || empty( $args['sgs_error'] ) ) {
+			$args['exit'] = true;
 			_default_wp_die_handler( $message, $title, $args );
 		}
 

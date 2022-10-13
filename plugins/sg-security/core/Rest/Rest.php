@@ -152,14 +152,6 @@ class Rest {
 				'permission_callback' => array( $this, 'check_permissions' ),
 			)
 		);
-
-		register_rest_route(
-			self::REST_NAMESPACE, '/hsts-protection/', array(
-				'methods'             => 'POST',
-				'callback'            => array( $this->site_security_helper, 'hsts_protection' ),
-				'permission_callback' => array( $this, 'check_permissions' ),
-			)
-		);
 	}
 
 	/**
@@ -359,6 +351,22 @@ class Rest {
 			self::REST_NAMESPACE, '/notification-emails/', array(
 				'methods'             => 'POST',
 				'callback'            => array( $this->activity_helper, 'manage_notification_emails' ),
+				'permission_callback' => array( $this, 'check_permissions' ),
+			)
+		);
+
+		register_rest_route(
+			self::REST_NAMESPACE, '/manage-activity-log/', array(
+				'methods'             => 'POST',
+				'callback'            => array( $this->activity_helper, 'manage_activity_log' ),
+				'permission_callback' => array( $this, 'check_permissions' ),
+			)
+		);
+
+		register_rest_route(
+			self::REST_NAMESPACE, '/activity-log-lifetime/', array(
+				'methods'             => 'POST',
+				'callback'            => array( $this->activity_helper, 'activity_log_lifetime' ),
 				'permission_callback' => array( $this, 'check_permissions' ),
 			)
 		);

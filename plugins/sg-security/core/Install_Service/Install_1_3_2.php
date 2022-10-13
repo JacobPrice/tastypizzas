@@ -49,7 +49,7 @@ class Install_1_3_2 extends Install {
 		// Get all users with 2FA configured in order to hash the backup codes.
 		$users_2fa_configured = get_users(
 			array(
-				'role__in'   => $this->sg_2fa->get_2fa_user_roles(),
+				'role__in'   => $this->sg_2fa->get_admin_user_roles(),
 				'fields'     => array( 'ID' ),
 				'meta_query' => array(
 					array(

@@ -5,7 +5,7 @@
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '6ad9b36faf915b64b29b912a0788aba936bd0592',
+        'reference' => 'ed01841966a681b9fb2a1319d6c8ade604fc561d',
         'name' => 'siteground/sg-security',
         'dev' => true,
     ),
@@ -19,6 +19,15 @@
                 0 => '9999999-dev',
             ),
             'reference' => 'c2d228fbbb69b90b6c331141b89c4faf985e6152',
+            'dev_requirement' => false,
+        ),
+        'composer/installers' => array(
+            'pretty_version' => 'v1.12.0',
+            'version' => '1.12.0.0',
+            'type' => 'composer-plugin',
+            'install_path' => __DIR__ . '/./installers',
+            'aliases' => array(),
+            'reference' => 'd20a64ed3c94748397ff5973488761b22f6d3f19',
             'dev_requirement' => false,
         ),
         'phpgangsta/googleauthenticator' => array(
@@ -50,6 +59,12 @@
             'reference' => 'b5ce4082f059afac6761714a84497816f45271cc',
             'dev_requirement' => false,
         ),
+        'roundcube/plugin-installer' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '*',
+            ),
+        ),
         'sepia/po-parser' => array(
             'pretty_version' => '4.2.2',
             'version' => '4.2.2.0',
@@ -59,13 +74,19 @@
             'reference' => '8a6bbcd4a231b19e1b052c1c46b0fe2935331afe',
             'dev_requirement' => false,
         ),
+        'shama/baton' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '*',
+            ),
+        ),
         'siteground/sg-security' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '6ad9b36faf915b64b29b912a0788aba936bd0592',
+            'reference' => 'ed01841966a681b9fb2a1319d6c8ade604fc561d',
             'dev_requirement' => false,
         ),
         'siteground/siteground-data' => array(
@@ -76,7 +97,7 @@
             'aliases' => array(
                 0 => '9999999-dev',
             ),
-            'reference' => '8c6d89492847e43aeef2d5d0cb8860aa1e0220c3',
+            'reference' => 'c264465ed26f2a8509b2a2b59ccc64c73971b343',
             'dev_requirement' => false,
         ),
         'siteground/siteground-emails' => array(

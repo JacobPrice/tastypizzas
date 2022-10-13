@@ -30,6 +30,7 @@ class Admin {
 	public $dequeued_styles = array(
 		'auxin-front-icon', // Phlox Theme.
 		'mks_shortcodes_simple_line_icons', // Meks Flexible Shortcodes.
+		'onthego-admin-styles', // Toolset Types
 	);
 
 	/**
@@ -250,10 +251,12 @@ class Admin {
 		// Load the global submenu.
 		global $submenu;
 		if ( empty( $submenu['sg-security'] ) ) {
-			return;
+			return $menu_order;
 		}
 
 		$submenu['sg-security'][0][0] = __( 'Dashboard', 'sg-security' );
+
+		return $menu_order;
 	}
 
 	/**

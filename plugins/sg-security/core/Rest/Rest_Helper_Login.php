@@ -199,7 +199,7 @@ class Rest_Helper_Login extends Rest_Helper {
 		self::send_json(
 			'Login attempts limited!',
 			1,
-			$this->login_service->get_login_attempts_data( intval( get_option( 'sg_security_login_attempts', 0 ) ) )
+			$this->prepare_options_selected_values( $this->login_service->login_attempts_data, intval( get_option( 'sg_security_login_attempts', 0 ) ) )
 		);
 	}
 }

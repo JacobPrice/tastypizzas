@@ -126,9 +126,6 @@ Disable Themes & Plugins Editor in the WordPress admin to prevent potential codi
 = Disable XML-RPC =
 You can Disable XML-RPC protocol which was recently used in a number of exploits. Keep in mind that when disabled, it will prevent WordPress from communicating with third-party systems. We recommend using this, unless you specifically need it.
 
-= Force HTTP Strict-Transport-Security (HSTS) =
-HSTS (HTTP Strict-Transport-Security) is a response header. It allows the website to tell browsers that it should only be accessed using HTTPS, instead of using HTTP. Тhis prevents "man-in-the-middle" attacks and ensures that regular visitors will redirected to the secure version of the website.
-
 = Disable RSS and ATOM Feeds =
 Disable RSS and ATOM Feeds to prevent content scraping and specific attacks against your site. It’s recommended to use this at all times, unless you have readers using your site via RSS readers.
 
@@ -152,6 +149,14 @@ function set_custom_log_lifetime() {
 }
 `
 
+If you need to disable the activity log, you can use the following filter. Keep in mind that this will also disable the Weekly Activity Log Emails.
+
+`
+add_action( 'init', 'deactivate_activity_log' );
+function deactivate_activity_log() {
+    update_option( 'sg_security_disable_activity_log', 1 );
+}
+`
 
 == Post-Hack Actions ==
 
@@ -185,6 +190,7 @@ In version 1.0.2 we've added full WP-CLI support for all plugin options and func
 * `wp sg log ua add|remove|list <name> ` - add/list/remove user defined bots listed in the activity log by user agent
 * `wp sg list log-unknown|log-registered|log-blocked --days=<days>` - List specific access log for a specific period
 * `wp sg 2fa reset id ID` - Resets the 2fa setup for the user ID.
+* `wp sg custom-login status|disable` - Shows the status or disables the Custom Login URL functionality.
 
 = Requirements =
 * WordPress 4.7
@@ -209,6 +215,23 @@ In version 1.0.2 we've added full WP-CLI support for all plugin options and func
 1. Go to Plugins -> Installed Plugins and click the 'Activate' link under the WordPress SiteGround Security listing
 
 == Changelog ==
+
+= Version 1.3.4 =
+Release Date: Oct 10th, 2022
+
+* Install service fix
+
+= Version 1.3.3 =
+Release Date: Oct 10th, 2022
+
+* New Manage Activity Log option
+* New filter - Disable activity log
+* Improved Custom login url
+* Improved WP-CLI support
+* Improved Jetpack plugin support
+* Improved error handling
+* Minor bug fixes
+* Legacy code removed
 
 = Version 1.3.2 =
 Release Date: Sept 21st, 2022

@@ -110,7 +110,7 @@ class Loader {
 			return;
 		}
 
-		$settings = Settings::get_instance();
+		$settings = ! method_exists( 'Siteground_Data\\Settings', 'get_instance' ) ? new Settings() : Settings::get_instance();
 
 		// Schedule Cron Job for sending the data.
 		$settings->schedule_cron_job();
@@ -239,6 +239,11 @@ class Loader {
 			$install_6_0_0->install();
 			update_option( 'siteground_optimizer_version', '6.0.0' );
 		}
+
+		// Force the installation process if it is not completed.
+		if ( false === get_option( 'sgo_install_service', false ) ) {
+			$this->install_service->install();
+		}
 	}
 
 	/**
@@ -282,7 +287,8 @@ class Loader {
 			add_action( 'admin_menu', array( $this->admin, 'add_plugin_pages' ) );
 			// add_action( 'admin_notices', array( $this->admin, 'memcache_notice' ) );
 			// Reorder the submenu.
-			add_filter( 'custom_menu_order', array( $this->admin, 'reorder_submenu_pages' ) );
+			add_filter( 'custom_menu_order', '__return_true' );
+			add_filter( 'menu_order', array( $this->admin, 'reorder_submenu_pages' ) );
 			// Hide the global memcache notice.
 			add_action( 'wp_ajax_dismiss_memcache_notice', array( $this->admin, 'hide_memcache_notice' ) );
 			// Hide the global blocking plugins notice.
@@ -446,15 +452,15 @@ class Loader {
 		// Loop all children.
 		foreach ( $this->lazy_load->children as $child_name => $child ) {
 			// Loop trough all options.
-			foreach ( $child as $attriutes ) {
+			foreach ( $child as $attributes ) {
 
 				// Continue if option is in the exclude list.
-				if ( in_array( 'lazyload_'. $attriutes["option"], $excluded_types ) ) {
+				if ( in_array( 'lazyload_'. $attributes["option"], $excluded_types ) ) {
 					continue;
 				}
 
 				// Add the options hooks and child.
-				add_filter( $attriutes['hook'], array( $this->lazy_load->$child_name, 'filter_html' ), $priority );
+				add_filter( $attributes['hook'], array( $this->lazy_load->$child_name, 'filter_html' ), $priority );
 			}
 		}
 
@@ -637,6 +643,7 @@ class Loader {
 		$this->add_caching_hooks( $this->supercacher );
 
 		add_action( 'pll_save_post', array( $this->supercacher, 'flush_memcache' ) );
+		add_action( 'customize_save_after', array( $this->supercacher, 'flush_memcache' ) );
 	}
 
 	/**
@@ -696,11 +703,11 @@ class Loader {
 		// Loop all children.
 		foreach ( $class->children as $child_name => $child ) {
 			// Loop trough all options.
-			foreach ( $child as $attriutes ) {
+			foreach ( $child as $attributes ) {
 				add_action(
-					$attriutes['hook'], // The hook.
-					array( $class->$child_name, $attriutes['option'] ), // The callback.
-					! empty( $attriutes['priority'] ) ? $attriutes['priority'] : 10 // The priority.
+					$attributes['hook'], // The hook.
+					array( $class->$child_name, $attributes['option'] ), // The callback.
+					! empty( $attributes['priority'] ) ? $attributes['priority'] : 10 // The priority.
 				);
 			}
 		}

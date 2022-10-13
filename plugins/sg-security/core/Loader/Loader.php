@@ -203,7 +203,8 @@ class Loader {
 	 */
 	public function add_admin_hooks() {
 		add_action( 'admin_menu', array( $this->admin, 'add_plugin_pages' ) );
-		add_filter( 'custom_menu_order', array( $this->admin, 'reorder_submenu_pages' ) );
+		add_filter( 'custom_menu_order', '__return_true' );
+		add_filter( 'menu_order', array( $this->admin, 'reorder_submenu_pages' ) );
 		add_action( 'admin_enqueue_scripts', array( $this->admin, 'enqueue_styles' ), 11 );
 		add_action( 'admin_enqueue_scripts', array( $this->admin, 'enqueue_scripts' ) );
 		add_action( 'admin_print_styles', array( $this->admin, 'admin_print_styles' ) );
@@ -253,6 +254,7 @@ class Loader {
 		add_action( 'wp_ajax_dismiss_sg_security_notice', array( $this->custom_login_url, 'hide_notice' ) );
 		add_action( 'admin_notices', array( $this->custom_login_url, 'show_notices' ) );
 		add_filter( 'wpdiscuz_login_link', array( $this->custom_login_url, 'custom_login_for_wpdiscuz' ) );
+		add_action( 'wp_authenticate_user', array( $this->custom_login_url, 'maybe_block_custom_login' ) );
 	}
 
 	/**
@@ -391,6 +393,12 @@ class Loader {
 	public function add_activity_log_hooks() {
 		// Fires only for Multisite. Add log, visitors table if network active.
 		add_action( 'wp_insert_site', array( $this->activity_log, 'create_subsite_log_tables' ) );
+
+		// Disable activity log and weekly reports email.
+		if ( 1 === intval( get_option( 'sg_security_disable_activity_log', 0 ) ) ) {
+			$this->activity_log->weekly_emails->weekly_report_email->unschedule_event();
+			return;
+		}
 
 		// Set the cron job for deleting the old logs.
 		add_action( 'init', array( $this->activity_log, 'set_sgs_logs_cron' ) );
